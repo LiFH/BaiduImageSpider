@@ -11,8 +11,10 @@ import scrapy
 class BaiduimagespiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    class_id = scrapy.Field() # 类ID
     img_url = scrapy.Field()  # 图像所对应url
     img_class = scrapy.Field()  # 图像所对应类别
     img_index = scrapy.Field()  # 序号
+    virtual = scrapy.Field() # 父类
     pass
 

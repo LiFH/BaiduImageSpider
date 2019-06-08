@@ -17,7 +17,8 @@ class BaiduimagespiderPipeline(ImagesPipeline):
 
     def file_path(self, request, response=None, info=None):
         # rewrite the file_path
+        virtual = request.meta['item']['virtual']
         img_class = request.meta['item']['img_class']
         img_index = request.meta['item']['img_index']
-        filename = u'{0}/{1}.jpg'.format(img_class, img_index)
+        filename = u'{0}/{1}/{2}.jpg'.format(virtual,img_class, img_index)
         return filename
