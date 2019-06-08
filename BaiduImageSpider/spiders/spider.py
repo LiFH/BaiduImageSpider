@@ -11,6 +11,10 @@ from BaiduImageSpider.items import BaiduimagespiderItem
 import csv
 import urllib
 
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 filename = 'labels.csv'
 class BaiduImageSpider(scrapy.Spider):
     name = "baiduSpider"
@@ -20,6 +24,8 @@ class BaiduImageSpider(scrapy.Spider):
         with open(filename) as f:
             reader = csv.reader(f)
             for line in reader:
+                for j in range(0,3):
+                    line[j] = line[j].decode('GB2312')
                 queryWord = line[1] + line[2]
                 for i in range(0, 1, 1):
                     url = 'https://image.baidu.com/search/acjson' \
