@@ -18,8 +18,17 @@ NEWSPIDER_MODULE = 'BaiduImageSpider.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'BaiduImageSpider (+http://www.yourdomain.com)'
 
+
+# 下载图片的pipelines
+ITEM_PIPELINES = {'BaiduImageSpider.pipelines.BaiduimagespiderPipeline': 1}
+
+# items 中图片的url
+IMAGES_URLS_FIELD = 'img_url'
+# .代表当前路径
+IMAGES_STORE = u'picture'
+
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
