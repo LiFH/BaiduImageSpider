@@ -15,17 +15,16 @@ import urllib
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-filename = 'labels.csv'
+filename = 'labels.txt'
 class BaiduImageSpider(scrapy.Spider):
     name = "baiduSpider"
     start_urls = []
-
     def start_requests(self):
         with open(filename) as f:
-            reader = csv.reader(f)
-            for line in reader:
-                for j in range(0,3):
-                    line[j] = line[j].decode('GB2312')
+            lines = f.readlines()
+            for line in lines:
+                # print line
+                line = line.split(',')
                 queryWord = line[1] + line[2]
                 for i in range(0, 1, 1):
                     url = 'https://image.baidu.com/search/acjson' \
