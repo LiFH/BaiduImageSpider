@@ -19,6 +19,11 @@ class BaiduimagespiderPipeline(ImagesPipeline):
         # rewrite the file_path
         virtual = request.meta['item']['virtual']
         img_class = request.meta['item']['img_class']
+        class_id = request.meta['item']['class_id']
         img_index = request.meta['item']['img_index']
-        filename = u'{0}/{1}/{2}.jpg'.format(virtual,img_class, img_index)
+        filename = u'{0}/({2}){1}/{3}.jpg'.format(virtual,img_class,class_id, img_index)
         return filename
+
+
+
+

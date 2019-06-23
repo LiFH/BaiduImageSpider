@@ -17,4 +17,3 @@ class BaiduimagespiderItem(scrapy.Item):
     img_index = scrapy.Field()  # 序号
     virtual = scrapy.Field() # 父类
     pass
-

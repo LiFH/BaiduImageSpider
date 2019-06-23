@@ -12,9 +12,6 @@ import csv
 import urllib
 
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 filename = 'labels.txt'
 class BaiduImageSpider(scrapy.Spider):
     name = "baiduSpider"
@@ -23,10 +20,10 @@ class BaiduImageSpider(scrapy.Spider):
         with open(filename) as f:
             lines = f.readlines()
             for line in lines:
-                # print line
+                line = line.strip('\n')
                 line = line.split(',')
                 queryWord = line[1] + line[2]
-                for i in range(0, 1, 1):
+                for i in range(0, 100000, 1):
                     url = 'https://image.baidu.com/search/acjson' \
                           '?tn=resultjson_com&ipn=rj&ct=201326592' \
                           '&is=&fp=result&queryWord=' + queryWord + \
@@ -35,23 +32,27 @@ class BaiduImageSpider(scrapy.Spider):
                                                  '&rn=1&face=0&istype=2&qc=&nc=1&fr=&pn=%d' % i
                     request = scrapy.Request(url
                                              , callback=self.parse
-                                             , meta={'class_id': line[0]
-                                                    , 'class': line[1]
-                                                    , 'virtual': line[2]})
+                                             , meta={'index':i
+                                                    ,'class_id': line[0]
+                                                    , 'class': line[3]
+                                                    , 'virtual': line[4]})
+
+                    print '__________________________________________________1'
+                    print request
+                    print '_________________2222222222222222222222222222222222'
                     yield request
 
     def parse(self, response):
         imgs = json.loads(response.body)['data']
-        index = 1
+
         for img in imgs:
             item = BaiduimagespiderItem()
             try:
                 item['img_url'] = [img['middleURL']]
                 item['img_class'] = response.meta['class']
                 item['class_id'] = response.meta['class_id']
-                item['img_index'] = index
+                item['img_index'] = response.meta['index']
                 item['virtual'] = response.meta['virtual']
-                index = index + 1
                 yield item
             except Exception as e:
                 print
