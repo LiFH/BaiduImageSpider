@@ -20,7 +20,7 @@ colorama==0.4.1
 configparser==3.7.4
 constantly==15.1.0
 contextlib2==0.5.5
-cryptography==2.7
+cryptography==3.2
 cssselect==1.0.3
 decorator==4.4.0
 defusedxml==0.6.0
